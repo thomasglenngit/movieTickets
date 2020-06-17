@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet" type="text/css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="js/scripts.js"></script>
+  <title>Movie Theatre</title>
+  <title></title>
+</head>
+
+<body>
+  <div class="container">
+    <h1>Movie Theatre</h1>
+    <h2>Add a ticket:</h2>
+    <form id="new-contact">
+
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input type="text" class="form-control" id="age">
+      </div>
+
+      <div class="form-group">
+        <label for="movieTitle">Movie Title:</label>
+        <select class="form-control" id="movieTitle">
+          <option value="1">Terminator</option>
+          <option value="2">Doom</option>
+          <option value="3">Lion King</option>
+          <option value="4">Babe</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="showtime">Show time:</label>
+        <select class="form-control" id="showtime">
+          <option value="1">11am</option>
+          <option value="2">2pm</option>
+          <option value="3">7pm</option>
+        </select>
+
+      </div>
+
+      <button type="submit" class="btn-primary">See your ticket: </button>
+    </form>
+    <hr>
+    <h2>Ticket:</h2>
+    <ul id="contacts">
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <div id="output">
+      <p>Your total for today's movie is $<span id=ticketPrice> dollars. </span></p>
+      <div id="buttons">
+      </div>
+    </div>
+  </div>
+</body>
