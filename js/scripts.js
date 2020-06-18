@@ -38,24 +38,28 @@
 // }
 
 // Business Logic for Contacts ---------
-function TicketHolder(age, movieTitle, showtime, price) {
+function TicketHolder(age, movieTitle, showtime) {
   this.age = age;
   this.movieTitle = movieTitle;
   this.showtime = showtime;
-  this.price = price;
+  this.price = 0;
 }
-
-
+ //this.age + this.movieTitle + this.showTime < 20
+// anyone under 18 can only have a high-score of 22.
+//const 
 TicketHolder.prototype.ticketPrice = function() {
-  if (this.age > 18 && this.movieTitle === 1 && this.showTime === 3) {
-       this.price = 15;
-  } else if ( this.age > 18 && this.movieTitle === 1 && showtime === 2) {
+  
+  if (this.age <= 18) { //if (this.age > 18 && this.movieTitle === 5 && this.showtime === 1)
+      this.price = 8;    
+   } else if (this.age >= 60) {
       this.price = 10;
-  } else {
-   this.price = 8;
-  }
+   } else {
+      this.price = 15;
+   }
   return this.price;
 }
+
+
 
 // ticketHolder.prototype.fullName = function() {
 //   return this.firstName + " " + this.lastName;
@@ -101,18 +105,19 @@ $(document).ready(function() {
     event.preventDefault();
     const age = parseInt($("input#age").val());
     const movieTitle = parseInt($("#movieTitle").val());
-    const showtime = parseInt($("#showTime").val());
+    const showtime = parseInt($("#showtime").val());
+    console.log(showtime);
     // $("input#new-first-name").val("");
     // $("input#new-last-name").val("");
     // $("input#new-phone-number").val("");
-    let newTicketHolder = new TicketHolder(age, movieTitle, showtime);
-    
+    let newTicketHolder = new TicketHolder(age, movieTitle, showtime);  
     console.log("What's up here?");
     // addressBook.addContact(newContact);
     // displayContactDetails(addressBook);
     // newTicketHolder.price();
     $("#output").show();
-    $("#ticketPrice").text(newTicketHolder.ticketPrice);
+    newTicketHolder.ticketPrice();
+    $("#ticketPrice").text(newTicketHolder.price);
     console.log();
   });
 });
