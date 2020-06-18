@@ -1,3 +1,7 @@
 #output {
   display: none;
 }
+
+#show-ticket {
+  display: none;
+}

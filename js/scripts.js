@@ -1,44 +1,45 @@
-// // Business Logic for AddressBook ---------
-// function AddressBook() {
-//   this.contacts = [],
-//   this.currentId = 0
-// }
+// Business Logic for TicketCatalog ---------
+function TicketCatalog() {
+  this.tickets = [];
+  this.currentId = 0;
+}
 
-// AddressBook.prototype.addContact = function(contact) {
-//   contact.id = this.assignId();
-//   this.contacts.push(contact);
-// }
+TicketCatalog.prototype.addTicket = function(ticket) {
+  ticket.id = this.assignId();
+  this.tickets.push(ticket);
+}
 
-// AddressBook.prototype.assignId = function() {
-//   this.currentId += 1;
-//   return this.currentId;
-// }
+TicketCatalog.prototype.assignId = function() {
+  this.currentId += 1;
+  return this.currentId;
+}
 
-// AddressBook.prototype.findContact = function(id) {
-//   for (let i=0; i< this.contacts.length; i++) {
-//     if (this.contacts[i]) {
-//       if (this.contacts[i].id == id) {
-//         return this.contacts[i];
-//       }
-//     }
-//   };
-//   return false;
-// }
+TicketCatalog.prototype.findTicket = function(id) {
+  for (let i=0; i < this.tickets.length; i++) {
+    if (this.tickets[i]) {
+      if (this.tickets[i].id == id) {
+        return this.tickets[i];
+      }
+    }
+  };
+  return false;
+}
 
-// AddressBook.prototype.deleteContact = function(id) {
-//   for (let i=0; i< this.contacts.length; i++) {
-//     if (this.contacts[i]) {
-//       if (this.contacts[i].id == id) {
-//         delete this.contacts[i];
-//         return true;
-//       }
-//     }
-//   };
-//   return false;
-// }
+TicketCatalog.prototype.deleteTicket = function(id) {
+  for (let i=0; i< this.tickets.length; i++) {
+    if (this.tickets[i]) {
+      if (this.tickets[i].id == id) {
+        delete this.tickets[i];
+        return true;
+      }
+    }
+  };
+  return false;
+}
 
 // Business Logic for Contacts ---------
 function TicketHolder(age, movieTitle, showtime) {
+  this.name = name;
   this.age = age;
   this.movieTitle = movieTitle;
   this.showtime = showtime;
@@ -66,7 +67,6 @@ TicketHolder.prototype.ticketPrice = function() {
 // }
 
 // User Interface Logic ---------
-// let addressBook = new AddressBook();
 
 // function displayContactDetails(addressBookToDisplay) {
 //   let contactsList = $("ul#contacts");
@@ -76,42 +76,52 @@ TicketHolder.prototype.ticketPrice = function() {
 //   });
 //   contactsList.html(htmlForContactInfo);
 // };
+function showTicketHolder(ticketId) {
+$("#query").click(function(event) {
+  event.preventDefault();
+ 
+  const ticket = ticketCatalog.findTicket(ticketId);
+  
+  $("#show-ticket").show();
 
-// function showContact(contactId) {
-//   const contact = addressBook.findContact(contactId);
-//   $("#show-contact").show();
-//   $(".first-name").html(contact.firstName);
-//   $(".last-name").html(contact.lastName);
-//   $(".phone-number").html(contact.phoneNumber);
-//   let buttons = $("#buttons");
-//   buttons.empty();
-//   buttons.append(`<button class='deleteButton ${contact.id}'>Delete</button>`);
-// }
+  $(".name").html(ticket.name);
+  $(".age").html(ticket.age);
+  $(".movieTitle").html(ticket.movieTitle);
+  $(".showtime").html(ticket.showtime);
+  let ticketButtons = $("#buttons");
+  ticketButtons.empty();
+  ticketButtons.append(`<button class='deleteButton ${ticket.id}'>Delete</button>`);
+})
+}
 
 function attachContactListeners() {
-  $("ul#contacts").on("click", "li", function() {
-    showContact($(this).attr("class"));
+  $("ul#tickets").on("click", "li", function() {
+    showTicket($(this).attr("class"));
   });
   $("#buttons").on("click", ".deleteButton", function() {
-    addressBook.deleteContact(this.id);
-    $("#show-contact").hide();
+    ticketCatalog.deleteTicket(this.id);
+    $("#show-ticket").hide();
     displayContactDetails(addressBook);
   });
 };
 
+let ticketCatalog = new TicketCatalog();
+
 $(document).ready(function() {
-  // attachContactListeners();
+  attachContactListeners();
   $("form#new-contact").submit(function(event) {
     event.preventDefault();
+    const name = $("input#name").val();
     const age = parseInt($("input#age").val());
     const movieTitle = parseInt($("#movieTitle").val());
     const showtime = parseInt($("#showtime").val());
     console.log(showtime);
-    // $("input#new-first-name").val("");
-    // $("input#new-last-name").val("");
-    // $("input#new-phone-number").val("");
-    let newTicketHolder = new TicketHolder(age, movieTitle, showtime);  
+   
+    let newTicketHolder = new TicketHolder(name, age, movieTitle, showtime);  
     console.log("What's up here?");
+
+    ticketCatalog.addTicket(newTicketHolder);
+    console.log(ticketCatalog.tickets);
     // addressBook.addContact(newContact);
     // displayContactDetails(addressBook);
     // newTicketHolder.price();
